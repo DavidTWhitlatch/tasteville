@@ -40,6 +40,7 @@ class FoodsController < ApplicationController
     @food.destroy
   end
 
+  # PUT /flavors/1/foods/1
   def add_flavor
     @flavor = Flavor.find(params[:flavor_id])
     # @food = Food.find(params[:id])
