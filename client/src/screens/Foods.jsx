@@ -8,7 +8,9 @@ export default function Foods(props) {
 			<h3>Foods</h3>
 			{foods.map((food) => (
 				<Fragment key={food.id}>
-					<p>{food.name}</p>
+					<Link to={`/foods/${food.id}`}>
+						<p>{food.name}</p>
+					</Link>
 					<Link to={`/foods/${food.id}/edit`}>
 						<button>Edit</button>
 					</Link>

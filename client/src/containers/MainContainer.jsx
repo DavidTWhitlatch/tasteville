@@ -6,6 +6,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import Flavors from '../screens/Flavors';
 import Foods from '../screens/Foods';
 import FoodCreate from '../screens/FoodCreate';
+import FoodDetail from '../screens/FoodDetail';
 import FoodEdit from '../screens/FoodEdit';
 
 // Services
@@ -48,10 +49,10 @@ export default function MainContainer() {
 		);
 		history.push('/foods');
 	};
-  const handleDelete = async (id) => {
-    await deleteFood(id);
-    setFoods(prevState => prevState.filter(food=> food.id !== id))
-  }
+	const handleDelete = async (id) => {
+		await deleteFood(id);
+		setFoods((prevState) => prevState.filter((food) => food.id !== id));
+	};
 
 	return (
 		<div>
@@ -59,11 +60,14 @@ export default function MainContainer() {
 				<Route path='/foods/:id/edit'>
 					<FoodEdit foods={foods} handleUpdate={handleUpdate} />
 				</Route>
+				<Route path='/foods/:id'>
+					<FoodDetail flavors={flavors} />
+				</Route>
 				<Route path='/foods/new'>
 					<FoodCreate handleCreate={handleCreate} />
 				</Route>
 				<Route path='/foods'>
-					<Foods foods={foods} handleDelete={handleDelete}/>
+					<Foods foods={foods} handleDelete={handleDelete} />
 				</Route>
 				<Route path='/flavors'>
 					<Flavors flavors={flavors} />
