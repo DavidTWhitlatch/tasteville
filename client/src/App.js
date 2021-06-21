@@ -2,9 +2,15 @@ import './App.css';
 import Layout from './layouts/Layout';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import MainContainer from './containers/MainContainer';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { loginUser, registerUser, verifyUser, removeToken } from './services/auth';
+import {
+	loginUser,
+	registerUser,
+	verifyUser,
+	removeToken,
+} from './services/auth';
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
@@ -13,9 +19,9 @@ function App() {
 	useEffect(() => {
 		const handleVerify = async () => {
 			const userData = await verifyUser();
-      setCurrentUser(userData);
+			setCurrentUser(userData);
 		};
-    handleVerify();
+		handleVerify();
 	}, []);
 
 	const handleLogin = async (formData) => {
@@ -30,11 +36,11 @@ function App() {
 		history.push('/');
 	};
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('authToken');
-    removeToken();
-  }
+	const handleLogout = () => {
+		setCurrentUser(null);
+		localStorage.removeItem('authToken');
+		removeToken();
+	};
 
 	return (
 		<div className='App'>
@@ -45,6 +51,9 @@ function App() {
 					</Route>
 					<Route path='/register'>
 						<Register handleRegister={handleRegister} />
+					</Route>
+					<Route path='/'>
+						<MainContainer />
 					</Route>
 				</Switch>
 			</Layout>
