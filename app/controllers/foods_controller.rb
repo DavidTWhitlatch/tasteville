@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :update, :destroy]
+  before_action :set_food, only: [:show, :update, :destroy, :add_flavor]
   before_action :authorized_request, only: [:create, :update, :destroy]
 
   # GET /foods
@@ -38,6 +38,17 @@ class FoodsController < ApplicationController
   # DELETE /foods/1
   def destroy
     @food.destroy
+  end
+
+  def add_flavor
+    @flavor = Flavor.find(params[:flavor_id])
+    # @food = Food.find(params[:id])
+
+    @flavor.foods << @food
+    # @flavor.foods.push(@food)
+    # ==== OR ====
+    # @food.flavors << @flavor
+    render json: @food, include: :flavors
   end
 
   private
